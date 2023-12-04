@@ -8,18 +8,18 @@ class DayX: Day {
 
     func a() async throws {
         let lines = try await Common.readLines(filePath: filePath)
-        let result = f("a", lines)
-        print(result)
+        let result = f(lines)
+        print("A: \(result)")
     }
 
     func b() async throws {
         let lines = try await Common.readLines(filePath: filePath)
-        let result = f("b", lines)
-        print(result)
+        let result = f(lines)
+        print("B: \(result)")
     }
 
-    func f(_ name: String, _ lines: [String]) -> String {
-        "TEST \(name): \(lines.count)"
+    func f(_ lines: [String]) -> Int {
+        lines.count
     }
 
     func runTests() {
