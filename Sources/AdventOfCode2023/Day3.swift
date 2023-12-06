@@ -85,7 +85,10 @@ class Day3: Day {
                 if cell == "*" {
                     let partNumberNeighbours = Set(getPartNumberNeighbours(rowIdx, colIdx))
                     if partNumberNeighbours.count == 2 {
-                        let gearRatio = partNumberNeighbours.map{ $0.number }.reduce(1, *)
+                        let gearRatio = partNumberNeighbours.map {
+                                $0.number
+                            }
+                            .reduce(1, *)
                         gearRatios.append(gearRatio)
                     }
                 }
@@ -165,9 +168,13 @@ class Day3: Day {
                       .664.598..
                       """
             .split(separator: "\n")
-            .map { String($0) }
+            .map {
+                String($0)
+            }
 
-        assert(findNumbersNextToSymbols(example.map{Array($0)}) == [
+        assert(findNumbersNextToSymbols(example.map {
+            Array($0)
+        }) == [
             NumberWithIndices(number: 467, indices: [(0, 0), (0, 1), (0, 2)]),
             NumberWithIndices(number: 35, indices: [(2, 2), (2, 3)]),
             NumberWithIndices(number: 633, indices: [(2, 7), (2, 8), (2, 9)]),

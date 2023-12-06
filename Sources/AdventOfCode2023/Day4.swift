@@ -43,7 +43,7 @@ class Day4: Day {
             let count = compute_winner_numbers_count(card)
 
             if count > 0 {
-                for i in 1 ... count {
+                for i in 1...count {
                     countByCard[idx + i, default: 0] += countByCard[idx]!
                 }
             }

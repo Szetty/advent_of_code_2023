@@ -12,6 +12,7 @@ class Day2: Day {
             let green: Int
             let blue: Int
         }
+
         let id: Int
         let cubeSets: [CubeSet]
     }
@@ -34,13 +35,16 @@ class Day2: Day {
     func sumOfPossibleGameIDs(_ lines: [String]) -> Int {
         let games = lines.map(parseGame)
         let possibleGames = filterPossibleGames(games: games)
-        return possibleGames.map { $0.id }.reduce(0, +)
+        return possibleGames.map {
+                $0.id
+            }
+            .reduce(0, +)
     }
 
     func filterPossibleGames(games: [Game]) -> [Game] {
         games.filter { game in
             !game.cubeSets.contains(
-                where: { $0.red > availableRedCubes || $0.green > availableGreenCubes || $0.blue > availableBlueCubes}
+                where: { $0.red > availableRedCubes || $0.green > availableGreenCubes || $0.blue > availableBlueCubes }
             )
         }
     }
@@ -57,9 +61,18 @@ class Day2: Day {
 
     func computeMaximumCubePerColorForGame(_ game: Game) -> (red: Int, green: Int, blue: Int) {
         (
-            game.cubeSets.map{ $0.red }.max() ?? 0,
-            game.cubeSets.map{ $0.green }.max() ?? 0,
-            game.cubeSets.map{ $0.blue }.max() ?? 0
+            game.cubeSets.map {
+                    $0.red
+                }
+                .max() ?? 0,
+            game.cubeSets.map {
+                    $0.green
+                }
+                .max() ?? 0,
+            game.cubeSets.map {
+                    $0.blue
+                }
+                .max() ?? 0
         )
     }
 
@@ -86,9 +99,11 @@ class Day2: Day {
             return Game.CubeSet(red: red, green: green, blue: blue)
         }
 
-        let parts = game.split(whereSeparator: {$0 == ":" || $0 == ";" })
+        let parts = game.split(whereSeparator: { $0 == ":" || $0 == ";" })
         let id = Int(parts[0].split(separator: " ")[1])!
-        let cubeSets = parts[1...].map { parseCubeSet($0) }
+        let cubeSets = parts[1...].map {
+            parseCubeSet($0)
+        }
         return Game(id: id, cubeSets: cubeSets)
     }
 
@@ -124,7 +139,9 @@ class Day2: Day {
                     Game.CubeSet(red: 1, green: 2, blue: 0),
                     Game.CubeSet(red: 0, green: 2, blue: 0),
                 ]),
-            ]).map{ $0.id } == [1, 2, 5]
+            ]).map {
+                $0.id
+            } == [1, 2, 5]
         )
 
         assert(computeMaximumCubePerColorForGame(testGame) == (red: 4, green: 2, blue: 6))

@@ -25,9 +25,9 @@ class Day1: Day {
 
     func sumOfNumberFromLines(_ lines: [String], lineToDigitsFn: (String) -> [Int]) -> Int {
         lines.map {
-                    numberFromLine(line: $0, lineToDigitsFn: lineToDigitsFn)
-                }
-                .reduce(0, +)
+                numberFromLine(line: $0, lineToDigitsFn: lineToDigitsFn)
+            }
+            .reduce(0, +)
     }
 
     func numberFromLine(line: String, lineToDigitsFn: (String) -> [Int]) -> Int {
@@ -57,9 +57,11 @@ class Day1: Day {
         let matches = regexDigitOrDigitFromLetters.matches(in: line, range: stringRange)
         var result: [Int] = []
         for match in matches {
-            for rangeIndex in 1 ..< match.numberOfRanges {
+            for rangeIndex in 1..<match.numberOfRanges {
                 let nsRange = match.range(at: rangeIndex)
-                guard !NSEqualRanges(nsRange, NSMakeRange(NSNotFound, 0)) else { continue }
+                guard !NSEqualRanges(nsRange, NSMakeRange(NSNotFound, 0)) else {
+                    continue
+                }
                 let string = (line as NSString).substring(with: nsRange)
                 switch string {
                 case "one": result.append(1)
@@ -86,11 +88,11 @@ class Day1: Day {
         assert(sumOfNumberFromLines([], lineToDigitsFn: digitsFromLine) == 0, "sum is wrong")
         assert(sumOfNumberFromLines(["11", "2", "33"], lineToDigitsFn: digitsFromLine) == 66, "sum is wrong")
         assert(
-                sumOfNumberFromLines(
-                        ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"],
-                        lineToDigitsFn: digitsFromLine
-                ) == 142,
-                "sum is wrong"
+            sumOfNumberFromLines(
+                ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"],
+                lineToDigitsFn: digitsFromLine
+            ) == 142,
+            "sum is wrong"
         )
 
         assert(digitsFromLineFromLettersToo(line: "1oneabctwo2") == [1, 1, 2, 2], "digits from letters is wrong")
@@ -99,19 +101,19 @@ class Day1: Day {
         assert(digitsFromLineFromLettersToo(line: "zoneight234") == [1, 8, 2, 3, 4], "digits from letters is wrong")
         assert(sumOfNumberFromLines(["4nineeightseven2"], lineToDigitsFn: digitsFromLineFromLettersToo) == 42, "sum is wrong")
         assert(
-                sumOfNumberFromLines(
-                        [
-                            "two1nine",
-                            "eightwothree",
-                            "abcone2threexyz",
-                            "xtwone3four",
-                            "4nineeightseven2",
-                            "zoneight234",
-                            "7pqrstsixteen",
-                        ],
-                        lineToDigitsFn: digitsFromLineFromLettersToo
-                ) == 281,
-                "sum is wrong"
+            sumOfNumberFromLines(
+                [
+                    "two1nine",
+                    "eightwothree",
+                    "abcone2threexyz",
+                    "xtwone3four",
+                    "4nineeightseven2",
+                    "zoneight234",
+                    "7pqrstsixteen",
+                ],
+                lineToDigitsFn: digitsFromLineFromLettersToo
+            ) == 281,
+            "sum is wrong"
         )
     }
 }
