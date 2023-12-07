@@ -54,12 +54,10 @@ class Day6: Day {
         assert(races.count == 1)
         let race = races[0]
 
-        let (x1, x2) = solveEquation(Double(race.time), Double(race.distance))
-
-        return (Int(x1.rounded(.up))...Int(x2.rounded(.down))).count
+        return solveEquation(Double(race.time), Double(race.distance))
     }
 
-    private func solveEquation(_ t: Double, _ d: Double) -> (Double, Double) {
+    private func solveEquation(_ t: Double, _ d: Double) -> Int {
         /*
             Equation will look like this
             x + y = t
@@ -68,14 +66,13 @@ class Day6: Day {
             x^2 - t * x + d = 0
             we need to calculate x1, x2 for this 2nd degree equation
             for values in the range x1...x2 we will have x * y >= d
+            to calculate the difference square root of delta of the equation is enough
          */
         let a = 1.0
         let b = -t
         let c = d
         let d = b * b - 4 * a * c
-        let x1 = (-b - sqrt(d)) / (2 * a)
-        let x2 = (-b + sqrt(d)) / (2 * a)
-        return (x1, x2)
+        return Int(sqrt(d).rounded(.down))
     }
 
     func parseRaceDocument(_ lines: [String], mergeTimesAndDistances: Bool = false) -> [Race] {
