@@ -15,3 +15,4 @@ swift run AdventOfCode2023 <day>
 5. [Day 5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/day/5)
 6. [Day 6: Wait For It](https://adventofcode.com/2023/day/6)
 7. [Day 7: Camel Cards](https://adventofcode.com/2023/day/7)
+8. [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8)

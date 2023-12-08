@@ -8,6 +8,10 @@ class Common {
         }
         return lines
     }
+
+    static func transformToLines(_ string: String) -> [String] {
+        string.components(separatedBy: .newlines).filter{ $0 != "" }
+    }
 }
 
 extension Array {
