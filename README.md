@@ -17,3 +17,4 @@ swift run AdventOfCode2023 <day>
 7. [Day 7: Camel Cards](https://adventofcode.com/2023/day/7)
 8. [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8)
 9. [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9)
+10. [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10)
