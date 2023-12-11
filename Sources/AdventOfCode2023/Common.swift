@@ -12,6 +12,21 @@ class Common {
     static func transformToLines(_ string: String) -> [String] {
         string.components(separatedBy: .newlines).filter{ $0 != "" }
     }
+
+    static func transpose<T>(_ array2d: [[T]]) -> [[T]] {
+        var transposed: [[T]] = array2d
+
+        // finding transpose of a 2d array by
+        // swapping self[x][y] with self[y][x]
+        for x in 0..<array2d.count {
+            for y in 0..<array2d[x].count {
+                transposed[x][y] = array2d[y][x]
+                transposed[y][x] = array2d[x][y]
+            }
+        }
+
+        return transposed
+    }
 }
 
 extension Array {
@@ -39,5 +54,23 @@ extension Array where Element: Comparable {
             }
         }
         return lhs.count < rhs.count
+    }
+}
+
+extension Collection where Self.Iterator.Element: RandomAccessCollection {
+    // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
+    func transposed() -> [[Self.Iterator.Element.Iterator.Element]] {
+        guard let firstRow = self.first else { return [] }
+        return firstRow.indices.map { index in
+            self.map{ $0[index] }
+        }
+    }
+}
+
+func anyClosedRange<Bound>(_ a: Bound, _ b: Bound) -> ClosedRange<Bound> {
+    if a <= b {
+        return a...b
+    } else {
+        return b...a
     }
 }
