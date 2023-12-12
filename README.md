@@ -19,3 +19,4 @@ swift run AdventOfCode2023 <day>
 9. [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9)
 10. [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10)
 11. [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11)
+12. [Day 12: Hot Springs](https://adventofcode.com/2023/day/12)

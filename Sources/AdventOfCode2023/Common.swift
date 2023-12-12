@@ -74,3 +74,7 @@ func anyClosedRange<Bound>(_ a: Bound, _ b: Bound) -> ClosedRange<Bound> {
         return b...a
     }
 }
+
+func ==<A: Equatable, B: Equatable>(lhs: [(A, B)], rhs: [(A, B)]) -> Bool {
+    zip(lhs, rhs).allSatisfy(==)
+}
