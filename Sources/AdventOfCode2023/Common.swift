@@ -10,7 +10,9 @@ class Common {
     }
 
     static func transformToLines(_ string: String) -> [String] {
-        string.components(separatedBy: .newlines).filter{ $0 != "" }
+        string.components(separatedBy: .newlines).filter {
+            $0 != ""
+        }
     }
 
     static func transpose<T>(_ array2d: [[T]]) -> [[T]] {
@@ -44,6 +46,20 @@ extension Array {
     }
 }
 
+extension Collection {
+    func split(with predicate: (Iterator.Element) -> Bool) -> (matching: [Iterator.Element], notMatching: [Iterator.Element]) {
+        var groups: ([Iterator.Element], [Iterator.Element]) = ([], [])
+        for element in self {
+            if predicate(element) {
+                groups.0.append(element)
+            } else {
+                groups.1.append(element)
+            }
+        }
+        return groups
+    }
+}
+
 extension Array where Element: Comparable {
     static func <(lhs: [Element], rhs: [Element]) -> Bool {
         for i in 0..<Swift.min(lhs.count, rhs.count) {
@@ -60,9 +76,13 @@ extension Array where Element: Comparable {
 extension Collection where Self.Iterator.Element: RandomAccessCollection {
     // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
     func transposed() -> [[Self.Iterator.Element.Iterator.Element]] {
-        guard let firstRow = self.first else { return [] }
+        guard let firstRow = self.first else {
+            return []
+        }
         return firstRow.indices.map { index in
-            self.map{ $0[index] }
+            self.map {
+                $0[index]
+            }
         }
     }
 }

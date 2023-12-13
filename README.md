@@ -20,3 +20,4 @@ swift run AdventOfCode2023 <day>
 10. [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10)
 11. [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11)
 12. [Day 12: Hot Springs](https://adventofcode.com/2023/day/12)
+13. [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13)
