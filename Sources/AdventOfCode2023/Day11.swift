@@ -28,10 +28,6 @@ class Day11: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseAndCalculateSumOfDistancesForPairsOfGalaxies(_ lines: [String]) -> Int {
         let (_, galaxyCoordinates, expansion: expansion) = parseImageAndExpand(lines)
         return calculateSumOfDistancesForPairsOfGalaxies(galaxyCoordinates, expansion: expansion)

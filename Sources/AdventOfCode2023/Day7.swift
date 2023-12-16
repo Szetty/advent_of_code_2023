@@ -37,10 +37,6 @@ class Day7: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseAndCalculateTotalWinnings(_ lines: [String], withJoker: Bool) -> Int {
         calculateTotalWinnings(sortHands(parseHandsAndBids(lines), withJoker: withJoker))
     }

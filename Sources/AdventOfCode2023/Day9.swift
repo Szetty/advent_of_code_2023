@@ -20,10 +20,6 @@ class Day9: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseHistoryAndFindSumOfTheirNextValue(_ lines: [String]) -> Int {
         parseHistories(lines).map { findNextValue($0) }.reduce(0, +)
     }

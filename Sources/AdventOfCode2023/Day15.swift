@@ -21,10 +21,6 @@ class Day15: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseStepsAndCalculateSumOfHashes(_ lines: [String]) -> Int {
         parseSteps(lines)
             .map {

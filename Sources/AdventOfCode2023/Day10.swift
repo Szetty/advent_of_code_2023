@@ -57,10 +57,6 @@ class Day10: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseAndBuildPolygonAndReturnStepsNeededToBuild(_ lines: [String]) -> Int {
         let (grid: grid, startingTile: startingTile) = parseGrid(lines)
         let polygon = buildPolygon(grid, startingTile: startingTile!)

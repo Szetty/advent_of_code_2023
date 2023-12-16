@@ -26,10 +26,6 @@ class Day13: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseMapsAndCalculateSumOfReflections(_ lines: [String]) -> Int {
         calculateSumOfReflections(parseMaps(lines))
     }

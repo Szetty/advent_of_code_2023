@@ -29,10 +29,6 @@ class Day6: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     private func calculateProductOfNumberOfRaceStrategiesToWin(_ lines: [String]) -> Int {
         parseRaceDocument(lines)
             .map {
