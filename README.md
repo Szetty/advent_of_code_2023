@@ -25,3 +25,5 @@ swift run AdventOfCode2023 <day>
 15. [Day 15: Lens Library](https://adventofcode.com/2023/day/15)
 16. [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16)
 17. [Day 17: Clumsy Crucible](https://adventofcode.com/2023/day/17)
+18. [Day 18: Lavaduct Lagoon](https://adventofcode.com/2023/day/18)
+19. [Day 19: Aplenty](https://adventofcode.com/2023/day/19)
