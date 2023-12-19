@@ -4,7 +4,19 @@ class Day14: Day {
     let filePath = "input/14"
 
     typealias Platform = [[Character]]
-    typealias Coordinate = (row: Int, col: Int)
+
+    struct Coordinate: Equatable {
+        let row: Int
+        let col: Int
+
+        static func +(lhs: Coordinate, rhs: Coordinate) -> Coordinate {
+            Coordinate(row: lhs.row + rhs.row, col: lhs.col + rhs.col)
+        }
+    }
+
+    enum TiltDirection: CaseIterable {
+        case north, west, south, east
+    }
 
     required init() {
     }
@@ -17,7 +29,7 @@ class Day14: Day {
 
     func b() async throws {
         let lines = try await Common.readLines(filePath: filePath)
-        let result = f(lines)
+        let result = parsePlatformAndRunCyclesAndCalculateSumOfLoads(lines)
         print("B: \(result)")
     }
 
@@ -29,47 +41,110 @@ class Day14: Day {
         calculateSumOfLoads(tiltPlatform(parsePlatform(lines)))
     }
 
+    func parsePlatformAndRunCyclesAndCalculateSumOfLoads(_ lines: [String]) -> Int {
+        calculateSumOfLoads(runCycles(parsePlatform(lines), cycleCount: 1_000_000_000))
+    }
+
     func calculateSumOfLoads(_ platform: Platform) -> Int {
         var sum = 0
-        for col in platform {
-            for (rowIdx, c) in col.enumerated() {
+        for (rowIdx, row) in platform.enumerated() {
+            for c in row {
                 if c == "O" {
-                    sum += col.count - rowIdx
+                    sum += platform.count - rowIdx
                 }
             }
         }
         return sum
     }
 
-    func tiltPlatform(_ platform: Platform) -> Platform {
+    func runCycles(_ platform: Platform, cycleCount: Int = 1) -> Platform {
+        var newPlatform = platform
+        var visitedPlatformsByPlatform: [Platform: Int] = [
+            platform: 0
+        ]
+        var visitedPlatformsByIndex: [Int: Platform] = [
+            0: platform
+        ]
+
+        var i = 1
+
+        for _ in 0..<cycleCount {
+            for tiltDirection in TiltDirection.allCases {
+                newPlatform = tiltPlatform(newPlatform, tiltDirection: tiltDirection)
+                if visitedPlatformsByPlatform[newPlatform] != nil {
+                    let offset = visitedPlatformsByPlatform[newPlatform]!
+                    let index = ((4 * cycleCount - offset) % (i - offset)) + offset
+                    return visitedPlatformsByIndex[index]!
+                }
+                visitedPlatformsByPlatform[newPlatform] = i
+                visitedPlatformsByIndex[i] = newPlatform
+                i += 1
+            }
+        }
+
+        return newPlatform
+    }
+
+    func tiltPlatform(_ platform: Platform, tiltDirection: TiltDirection = .north) -> Platform {
+        let rows = platform.count
+        let cols = platform[0].count
+
         var newPlatform = platform
 
-        func nextRock(_ row: Int, _ col: Int) -> Coordinate? {
-            var rockRow = row + 1
+        func withinBounds(_ coordinate: Coordinate) -> Bool {
+            coordinate.row >= 0 && coordinate.row < rows &&
+                coordinate.col >= 0 && coordinate.col < cols
+        }
 
-            while col < newPlatform.count && rockRow < newPlatform.count {
-                if newPlatform[col][rockRow] == "#" {
+        var rockSearchingDirectionCoordinate: Coordinate
+        var rowsRange: StrideThrough<Int>
+        var colsRange: StrideThrough<Int>
+
+        switch tiltDirection {
+        case .north:
+            rockSearchingDirectionCoordinate = Coordinate(row: 1, col: 0)
+            rowsRange = stride(from: 0, through: rows - 1, by: 1)
+            colsRange = stride(from: 0, through: cols - 1, by: 1)
+        case .south:
+            rowsRange = stride(from: rows - 1, through: 0, by: -1)
+            colsRange = stride(from: cols - 1, through: 0, by: -1)
+            rockSearchingDirectionCoordinate = Coordinate(row: -1, col: 0)
+        case .west:
+            rowsRange = stride(from: 0, through: rows - 1, by: 1)
+            colsRange = stride(from: 0, through: cols - 1, by: 1)
+            rockSearchingDirectionCoordinate = Coordinate(row: 0, col: 1)
+        case .east:
+            rowsRange = stride(from: rows - 1, through: 0, by: -1)
+            colsRange = stride(from: cols - 1, through: 0, by: -1)
+            rockSearchingDirectionCoordinate = Coordinate(row: 0, col: -1)
+        }
+
+        func nextRock(_ row: Int, _ col: Int) -> Coordinate? {
+            var currentCoordinate = Coordinate(row: row, col: col) + rockSearchingDirectionCoordinate
+
+            while withinBounds(currentCoordinate) {
+                if newPlatform[currentCoordinate.row][currentCoordinate.col] == "#" {
                     return nil
                 }
-                if newPlatform[col][rockRow] == "O" {
-                    return (rockRow, col)
+                if newPlatform[currentCoordinate.row][currentCoordinate.col] == "O" {
+                    return currentCoordinate
                 }
-                rockRow += 1
+                currentCoordinate = currentCoordinate + rockSearchingDirectionCoordinate
             }
 
             return nil
         }
 
-        for col in 0..<newPlatform[0].count {
-            for row in (0..<newPlatform.count) {
-                let c = newPlatform[col][row]
+        for row in rowsRange {
+            for col in colsRange {
+                let c = newPlatform[row][col]
                 switch c {
                 case "O", "#":
                     continue
                 case ".":
-                    if let (nextRockRow, nextRockCol) = nextRock(row, col) {
-                        newPlatform[col][row] = "O"
-                        newPlatform[nextRockCol][nextRockRow] = "."
+                    if let coordinate = nextRock(row, col) {
+                        newPlatform[row][col] = "O"
+                        newPlatform[coordinate.row][coordinate.col] = "."
                     }
                 default:
                     fatalError("Unknown character \(c)")
@@ -82,9 +157,8 @@ class Day14: Day {
 
     func parsePlatform(_ lines: [String]) -> Platform {
         lines.map {
-                Array($0)
-            }
-            .transposed()
+            Array($0)
+        }
     }
 
     func runTests() {
@@ -106,9 +180,9 @@ class Day14: Day {
 
         let platform = parsePlatform(example)
 
+        assert(platform.count == 10)
+        assert(platform[0].count == 10)
         assert(platform[0][0] == "O")
-        assert(platform[0].last == "#")
-        assert(platform.last![0] == ".")
         assert(platform.last!.last == ".")
 
         let tiltedPlatform = tiltPlatform(platform)
@@ -133,5 +207,24 @@ class Day14: Day {
         )
 
         assert(calculateSumOfLoads(tiltedPlatform) == 136)
+
+        assert(runCycles(platform) == parsePlatform(
+            Common.transformToLines(
+                """
+                .....#....
+                ....#...O#
+                ...OO##...
+                .OO#......
+                .....OOO#.
+                .O#...O#.#
+                ....O#....
+                ......OOOO
+                #...O###..
+                #..OO#....
+                """
+            )
+        ))
+
+        assert(calculateSumOfLoads(runCycles(platform, cycleCount: 1_000_000_000)) == 64)
     }
 }
