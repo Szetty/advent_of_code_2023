@@ -29,6 +29,19 @@ class Common {
 
         return transposed
     }
+
+    static func calculateLeastCommonMultiple(_ numbers: [Int]) -> Int {
+        numbers.reduce(1) { (result, number) in
+            result * number / calculateGreatestCommonDivisor(result, number)
+        }
+    }
+
+    static func calculateGreatestCommonDivisor(_ result: Int, _ number: Int) -> Int {
+        if result == 0 {
+            return number
+        }
+        return calculateGreatestCommonDivisor(number % result, result)
+    }
 }
 
 extension Array {

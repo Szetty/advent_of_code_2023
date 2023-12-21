@@ -141,10 +141,6 @@ class Day12: Day {
             ("?###????????", [3, 2, 1])
         ])
 
-//        assert(generateAllArrangements("?") == [".", "#"])
-//        assert(generateAllArrangements(".?.") == ["...", ".#."])
-//        assert(generateAllArrangements("#?#") == ["#.#", "###"])
-
         assert(validArrangement("#.#.###", checkSum: [1, 1, 3]) == true)
         assert(validArrangement("#.#.###", checkSum: [1, 1, 2]) == false)
         assert(validArrangement("#.#.###.", checkSum: [1, 1, 3]) == true)

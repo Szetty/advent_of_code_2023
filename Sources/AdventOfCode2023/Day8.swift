@@ -59,7 +59,9 @@ class Day8: Day {
     }
 
     func quickCalculateNumberOfSteps(_ map: Map) -> Int {
-        var currentNodes = map.network.keys.filter { $0.hasSuffix("A") }
+        var currentNodes = map.network.keys.filter {
+            $0.hasSuffix("A")
+        }
         var firstReachedEndNode: [Int: Int] = [:]
         var steps = 0
         while true {
@@ -74,22 +76,11 @@ class Day8: Day {
             }
             steps += 1
             if firstReachedEndNode.count == currentNodes.count {
-                return calculateLeastCommonMultiple(firstReachedEndNode.values.map { $0 })
+                return Common.calculateLeastCommonMultiple(firstReachedEndNode.values.map {
+                    $0
+                })
             }
         }
-    }
-
-    func calculateLeastCommonMultiple(_ numbers: [Int]) -> Int {
-        numbers.reduce(1) { (result, number) in
-            result * number / calculateGreatestCommonDivisor(result, number)
-        }
-    }
-
-    private func calculateGreatestCommonDivisor(_ result: Int, _ number: Int) -> Int {
-        if result == 0 {
-            return number
-        }
-        return calculateGreatestCommonDivisor(number % result, result)
     }
 
     func parseMap(_ lines: [String]) -> Map {

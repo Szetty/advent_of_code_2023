@@ -27,3 +27,4 @@ swift run AdventOfCode2023 <day>
 17. [Day 17: Clumsy Crucible](https://adventofcode.com/2023/day/17)
 18. [Day 18: Lavaduct Lagoon](https://adventofcode.com/2023/day/18)
 19. [Day 19: Aplenty](https://adventofcode.com/2023/day/19)
+20. [Day 20: Pulse Propagation](https://adventofcode.com/2023/day/20)
