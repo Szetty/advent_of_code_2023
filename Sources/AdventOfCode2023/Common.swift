@@ -1,5 +1,15 @@
 import Foundation
 
+infix operator %%
+
+extension Int {
+    static  func %% (_ left: Int, _ right: Int) -> Int {
+        if left >= 0 { return left % right }
+        if left >= -right { return (left+right) }
+        return ((left % right)+right)%right
+    }
+}
+
 class Common {
     static func readLines(filePath: String) async throws -> [String] {
         var lines: [String] = []
@@ -56,6 +66,19 @@ extension Array {
         stride(from: 0, to: count, by: size).map {
             Array(self[$0..<Swift.min($0 + size, count)])
         }
+    }
+
+    func uniqued<T>(by: (Element) -> T) -> Self where T: Hashable {
+        var seen: Set<T> = Set()
+        var newSelf = Self()
+        for element in self {
+            let by = by(element)
+            if !seen.contains(by) {
+                newSelf.append(element)
+                seen.insert(by)
+            }
+        }
+        return newSelf
     }
 }
 

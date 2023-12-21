@@ -154,10 +154,6 @@ class Day19: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseWorkflowsAndPartsAndComputeAcceptedPartsAndSumRatings(_ lines: [String]) -> Int {
         let (workflows, parts) = parseWorkflowsAndParts(lines)
         return computeAcceptedPartsAndSumRatings(workflows: workflows, parts: parts)
@@ -250,8 +246,12 @@ class Day19: Day {
                             fatalError("Unknown operator: \(op.name)")
                         }
 
-                        let newPartRange1 = currentPartRanges.merging([rating: newRange1]) { _, new in new }
-                        let newPartRange2 = currentPartRanges.merging([rating: newRange2]) { _, new in new }
+                        let newPartRange1 = currentPartRanges.merging([rating: newRange1]) { _, new in
+                            new
+                        }
+                        let newPartRange2 = currentPartRanges.merging([rating: newRange2]) { _, new in
+                            new
+                        }
 
                         let ruleResult1 = Workflow.Rule.applyCondition(newRange1.first!, op, value, result)
                         let ruleResult2 = Workflow.Rule.applyCondition(newRange2.first!, op, value, result)

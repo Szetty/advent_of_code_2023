@@ -66,10 +66,6 @@ class Day18: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseDigPlanAndDigEdgesAndInteriorAndCountCubicMeters(_ lines: [String]) -> Int {
         let edges = digEdges(parseDigPlan(lines))
         let area = calculatePolygonArea(edges)
@@ -228,20 +224,22 @@ class Day18: Day {
         assert(
             toMap(edges) ==
                 Common.transformToLines(
-                    """
-                    #.....#
-                    .......
-                    #.#....
-                    .......
-                    .......
-                    #.#.#.#
-                    .......
-                    ##..#.#
-                    .......
-                    .#....#
-                    """
-                )
-                    .map { Array($0) }
+                        """
+                        #.....#
+                        .......
+                        #.#....
+                        .......
+                        .......
+                        #.#.#.#
+                        .......
+                        ##..#.#
+                        .......
+                        .#....#
+                        """
+                    )
+                    .map {
+                        Array($0)
+                    }
         )
 
         let area = calculatePolygonArea(edges)

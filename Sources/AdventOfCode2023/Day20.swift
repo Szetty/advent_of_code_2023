@@ -87,10 +87,6 @@ class Day20: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseModulesAndPressButtonMultipleTimes(_ lines: [String]) -> Int {
         let modules = parseModules(lines)
         return pressButtonMultipleTimes(modules, count: 1000)

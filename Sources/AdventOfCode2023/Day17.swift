@@ -76,10 +76,6 @@ class Day17: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseMapAndFindPathWithMinimumHeatLoss(_ lines: [String]) -> Int {
         findPathWithMinimumHeatLoss(parseMap(lines))
     }
@@ -158,7 +154,7 @@ class Day17: Day {
             Position(row: 0, col: 1),
             Position(row: 1, col: 0),
         ]
-            .map{ newDirection in
+            .map { newDirection in
                 if newDirection == -path.direction {
                     return nil
                 }
@@ -201,7 +197,7 @@ class Day17: Day {
             .filter {
                 $0 != nil
             }
-            .map{
+            .map {
                 $0!
             }
     }
