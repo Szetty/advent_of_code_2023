@@ -29,3 +29,4 @@ swift run AdventOfCode2023 <day>
 19. [Day 19: Aplenty](https://adventofcode.com/2023/day/19)
 20. [Day 20: Pulse Propagation](https://adventofcode.com/2023/day/20)
 21. [Day 21: Step Counter](https://adventofcode.com/2023/day/21)
+22. [Day 22: Sand Slabs](https://adventofcode.com/2023/day/22)
