@@ -12,6 +12,10 @@ let package = Package(
         .package(
             url: "https://github.com/apple/swift-collections.git",
             .upToNextMinor(from: "1.0.0")
+        ),
+        .package(
+            url: "https://github.com/LuizZak/swift-z3.git",
+            branch: "4.11.2"
         )
     ],
     targets: [
@@ -20,7 +24,8 @@ let package = Package(
         .executableTarget(
             name: "AdventOfCode2023",
             dependencies: [
-                .product(name: "Collections", package: "swift-collections")
+                .product(name: "Collections", package: "swift-collections"),
+                .product(name: "SwiftZ3", package: "swift-z3")
             ]
         ),
     ]
