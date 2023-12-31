@@ -22,10 +22,6 @@ class Day12: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseConditionRecordsAndCalculateSumOfPossibleArrangements(_ lines: [String]) -> Int {
         let conditionRecords = parseConditionRecords(lines)
         return conditionRecords.map {

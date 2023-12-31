@@ -96,8 +96,8 @@ extension Collection {
     }
 }
 
-extension Array where Element: Comparable {
-    static func <(lhs: [Element], rhs: [Element]) -> Bool {
+extension Array: Comparable where Element: Comparable {
+    public static func <(lhs: [Element], rhs: [Element]) -> Bool {
         for i in 0..<Swift.min(lhs.count, rhs.count) {
             if lhs[i] < rhs[i] {
                 return true

@@ -32,3 +32,4 @@ swift run AdventOfCode2023 <day>
 22. [Day 22: Sand Slabs](https://adventofcode.com/2023/day/22)
 23. [Day 23: A Long Walk](https://adventofcode.com/2023/day/23)
 24. [Day 24: Never Tell Me The Odds](https://adventofcode.com/2023/day/24)
+25. [Day 25: Snowverload](https://adventofcode.com/2023/day/25)

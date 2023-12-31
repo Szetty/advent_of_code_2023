@@ -52,10 +52,6 @@ class Day23: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseMapAndComputeLongestPath(_ lines: [String]) -> Int {
         let (map, startingPosition, endingPosition) = parseMapAndStartingEndingPositions(lines)
         return computeLongestPath(

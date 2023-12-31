@@ -29,10 +29,6 @@ class Day24: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseHailStonesAndComputeNumberOfIntersections(_ lines: [String]) -> Int {
         let hailStones = parseHailStones(lines)
         return computeNumberOfIntersectionsInTestArea(hailStones, testArea: (200000000000000, 400000000000000))

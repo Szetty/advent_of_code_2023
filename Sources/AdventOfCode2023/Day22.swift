@@ -68,10 +68,6 @@ class Day22: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parseBricksAndSimulateFallingAndComputeNumberOfDisintegrableBricks(_ lines: [String]) -> Int {
         let bricks = parseBricks(lines)
         let (_, supportingBrickIDs) = simulateBricksFallingAndBuildSupportingBrickIDs(bricks)

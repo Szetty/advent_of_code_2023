@@ -33,10 +33,6 @@ class Day14: Day {
         print("B: \(result)")
     }
 
-    func f(_ lines: [String]) -> Int {
-        lines.count
-    }
-
     func parsePlatformTiltAndCalculateSumOfLoads(_ lines: [String]) -> Int {
         calculateSumOfLoads(tiltPlatform(parsePlatform(lines)))
     }
